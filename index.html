@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CivicSense: Report Civic Violations</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="hero">
+    <h1>Report civic-sense violations — safely, responsibly</h1>
+    <p>Upload clear evidence (photo or short video). Reports are verified before any action.</p>
+</header>
+
+<main role="main">
+    <section id="report-card" class="card">
+        <h2>Create a report</h2>
+        <form id="report-form" method="post" enctype="multipart/form-data">
+            <div class="field-group">
+                <label for="evidence">Upload photo or short video (max 50 MB)</label>
+                <input type="file" id="evidence" name="evidence" accept="image/,video/" required>
+                <small class="hint">Tip: keep the clip under 60 seconds and focus on the incident — no zooming/panning of unrelated people.</small>
+                <div class="validation-message" id="evidence-error"></div>
+            </div>
+
+            <div class="field-group">
+                <label>Location (optional)</label>
+                <div class="field-check">
+                    <input type="checkbox" id="share-location" name="share-location">
+                    <label for="share-location">Share my current location with this report (opt-in)</label>
+                </div>
+                <small class="small-text">Location helps investigators but will only be shared with verified authorities after moderation.</small>
+            </div>
+
+            <div class="field-group">
+                <label>When & Where</label>
+                <input type="date" id="incident-date" name="incident-date" required>
+                <input type="time" id="incident-time" name="incident-time">
+                <input type="text" id="incident-address" name="incident-address" placeholder="Address or landmark (optional)" maxlength="250">
+            </div>
+
+            <div class="field-group">
+                <label for="violation-type">Type of civic-sense violation</label>
+                <select id="violation-type" name="violation-type" required>
+                    <option value="">Select a violation type</option>
+                    <option value="littering">Littering</option>
+                    <option value="public-urination">Public urination/defecation</option>
+                    <option value="parking">Illegal parking/obstruction</option>
+                    <option value="vandalism">Vandalism/graffiti</option>
+                    <option value="traffic-behavior">Unsafe traffic behavior</option>
+                    <option value="other">Other (specify below)</option>
+                </select>
+                <div class="validation-message" id="violation-type-error"></div>
+            </div>
+
+            <div class="field-group">
+                <label for="description">Describe what you saw</label>
+                <textarea id="description" name="description" rows="5" minlength="20" maxlength="1000" required></textarea>
+                <small class="hint">Give concise context: what happened, who was affected, any follow-up actions.</small>
+                <div class="validation-message" id="description-error"></div>
+            </div>
+
+            <div class="field-group">
+                <label>Reporter details & privacy</label>
+                <div class="radio-group">
+                    <input type="radio" id="reporter-verified" name="reporter-identity" value="verified" required>
+                    <label for="reporter-verified">Sign in & verify (recommended)</label>
+                    <input type="radio" id="reporter-anonymous" name="reporter-identity" value="anonymous">
+                    <label for="reporter-anonymous">Report anonymously (privacy-protected)</label>
+                </div>
+                <small class="small-text">Verified reporters may be eligible for reward points. Anonymous reports are accepted but may have lower verification weight.</small>
+            </div>
+
+            <div class="field-group">
+                <div class="field-check">
+                    <input type="checkbox" id="consent" name="consent" required>
+                    <label for="consent">I confirm this evidence was collected legally and I grant the platform permission to share it with authorised investigators if needed.</label>
+                </div>
+                <small class="hint">Do not upload content that violates privacy or copyright. Do not impersonate. False reporting is prohibited.</small>
+                <div class="validation-message" id="consent-error"></div>
+            </div>
+
+            <div class="action-row">
+                <button type="button" id="preview-button">Preview</button>
+                <button type="submit" id="submit-button">Submit report</button>
+            </div>
+        </form>
+    </section>
+
+    </main>
+
+<div id="preview-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2>Preview Report</h2>
+        <div id="preview-evidence"></div>
+        <div id="preview-meta"></div>
+        <div class="action-row">
+            <button id="confirm-submit">Confirm & Submit</button>
+            <button id="edit-button">Edit</button>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
